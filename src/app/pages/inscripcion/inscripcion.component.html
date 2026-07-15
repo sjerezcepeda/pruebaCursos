@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+  <div class="card shadow p-4">
+    <h2 class="mb-4">Formulario de Inscripción</h2>
+
+    <div class="alert alert-danger" *ngIf="mensajeError">
+      {{ mensajeError }}
+    </div>
+
+    <form #formInscripcion="ngForm" (ngSubmit)="guardarInscripcion()">
+
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          name="nombre"
+          [(ngModel)]="nombre"
+          required
+          maxlength="30"
+          #nombreInput="ngModel">
+
+        <div class="text-danger" *ngIf="nombreInput.errors?.['required'] && nombreInput.touched">
+          El nombre es obligatorio.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Curso</label>
+        <select
+          class="form-select"
+          name="curso"
+          [(ngModel)]="curso"
+          required
+          #cursoInput="ngModel">
+          <option value="">Seleccione un curso</option>
+          <option value="Angular">Angular</option>
+          <option value="Python">Python</option>
+          <option value="Base de Datos">Base de Datos</option>
+        </select>
+
+        <div class="text-danger" *ngIf="cursoInput.invalid && cursoInput.touched">
+          Debe seleccionar un curso.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Jornada</label>
+        <select
+          class="form-select"
+          name="jornada"
+          [(ngModel)]="jornada"
+          required
+          #jornadaInput="ngModel">
+          <option value="">Seleccione jornada</option>
+          <option value="Mañana">Mañana</option>
+          <option value="Tarde">Tarde</option>
+          <option value="Noche">Noche</option>
+        </select>
+
+        <div class="text-danger" *ngIf="jornadaInput.invalid && jornadaInput.touched">
+          Debe seleccionar una jornada.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="email"
+          required
+          email
+          maxlength="30"
+          #emailInput="ngModel">
+
+        <div class="text-danger" *ngIf="emailInput.errors?.['required'] && emailInput.touched">
+          El email es obligatorio.
+        </div>
+
+        <div class="text-danger" *ngIf="emailInput.errors?.['email'] && emailInput.touched">
+          Ingrese un email válido.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="formInscripcion.invalid">
+        Guardar inscripción
+      </button>
+    </form>
+  </div>
+</div>

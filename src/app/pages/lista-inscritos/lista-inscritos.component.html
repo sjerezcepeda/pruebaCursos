@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+  <div class="alert alert-success" role="alert">
+    Inscripción registrada correctamente.
+  </div>
+
+  <div class="card shadow p-4">
+    <h2 class="mb-4">Cursos Inscritos</h2>
+
+    <table class="table table-bordered table-striped" *ngIf="inscritos.length > 0; else sinDatos">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Curso</th>
+          <th>Jornada</th>
+          <th>Email</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inscrito of inscritos; let i = index">
+          <td>{{ inscrito.nombre }}</td>
+          <td>{{ inscrito.curso }}</td>
+          <td>{{ inscrito.jornada }}</td>
+          <td>{{ inscrito.email }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="eliminarInscrito(i)">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #sinDatos>
+      <p>No hay cursos inscritos todavía.</p>
+    </ng-template>
+  </div>
+</div>

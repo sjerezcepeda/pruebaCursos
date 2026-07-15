@@ -1,0 +1,28 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
+
+@Component({
+  selector: 'app-lista-inscritos',
+  standalone: true,
+  imports: [CommonModule, NavbarComponent],
+  templateUrl: './lista-inscritos.component.html',
+  styleUrl: './lista-inscritos.component.css'
+})
+export class ListaInscritosComponent implements OnInit {
+  inscritos: any[] = [];
+
+  ngOnInit(): void {
+    this.cargarInscritos();
+  }
+
+  cargarInscritos() {
+    const datos = localStorage.getItem('inscritos');
+    this.inscritos = datos ? JSON.parse(datos) : [];
+  }
+
+  eliminarInscrito(index: number) {
+    this.inscritos.splice(index, 1);
+    localStorage.setItem('inscritos', JSON.stringify(this.inscritos));
+  }
+}
